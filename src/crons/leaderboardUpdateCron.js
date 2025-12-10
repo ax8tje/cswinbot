@@ -87,7 +87,7 @@ async function resetWeeklyBaselines() {
 }
 
 // Daily at 11:05 PM EST (4:05 AM UTC) - 5 minutes after leaderboard post
-cron.schedule('5 4 * * *', async () => {
+cron.schedule('5 23 * * *', async () => {
     try {
         await resetDailyBaselines();
     } catch (err) {
@@ -98,7 +98,7 @@ cron.schedule('5 4 * * *', async () => {
 });
 
 // Weekly on Sunday 11:05 PM EST (4:05 AM UTC Monday) - same time as daily on Sundays
-cron.schedule('5 4 * * 0', async () => {
+cron.schedule('5 23 * * 0', async () => {
     try {
         await resetWeeklyBaselines();
     } catch (err) {
