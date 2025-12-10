@@ -158,7 +158,7 @@ async function postLeaderboards(client) {
 
 module.exports = (client) => {
     // Daily leaderboard post at 11:00 PM EST (4:00 AM UTC) - every day
-    cron.schedule('0 4 * * *', async () => {
+    cron.schedule('0 23 * * *', async () => {
         try {
             await postLeaderboards(client);
         } catch (err) {
