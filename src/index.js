@@ -15,6 +15,7 @@ handleCommands(client);
 
 // Load cron jobs
 require("./crons/leaderboardUpdateCron");
+require("./crons/inactiveMemberCron");
 
 client.once("clientReady", () => {
     console.log(`Bot is online as ${client.user.tag}`);
