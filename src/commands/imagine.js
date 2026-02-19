@@ -43,7 +43,7 @@ module.exports = {
             refParam = `&image=${encodeURIComponent(publicUrl)}`;
         }
 
-        const model = reference ? "flux" : "flux";
+        const model = reference ? "gptimage" : "flux";
         const imageUrl = `https://gen.pollinations.ai/image/${encodeURIComponent(prompt)}?model=${model}&key=${process.env.POLLINATIONS_KEY}${refParam}`;
 
         const imageResponse = await axios.get(imageUrl, { responseType: "arraybuffer" });
