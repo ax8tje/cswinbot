@@ -19,11 +19,15 @@ module.exports = {
         const response = await axios.post(
             "https://api-free.deepl.com/v2/translate",
             new URLSearchParams({
-                auth_key: process.env.DEEPL_KEY,
                 text,
                 source_lang: "EN",
                 target_lang: "PL"
-            })
+            }),
+            {
+                headers: {
+                    Authorization: `DeepL-Auth-Key ${process.env.DEEPL_KEY}`
+                }
+            }
         );
 
         const translated = response.data.translations[0].text;
