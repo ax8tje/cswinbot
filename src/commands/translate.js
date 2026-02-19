@@ -16,18 +16,16 @@ module.exports = {
 
         await interaction.deferReply({ ephemeral: true });
 
-        const skipped = [];
-        const textToTranslate = text.replace(/\[([^\]]*)\]/g, (match, inner) => {
-            skipped.push(inner);
-            return `SKIP${skipped.length - 1}SKIP`;
-        });
+        const textToTranslate = text.replace(/\[([^\]]*)\]/g, (_, inner) => `<keep>${inner}</keep>`);
 
         const response = await axios.post(
             "https://api-free.deepl.com/v2/translate",
             new URLSearchParams({
                 text: textToTranslate,
                 source_lang: "EN",
-                target_lang: "PL"
+                target_lang: "PL",
+                tag_handling: "xml",
+                ignore_tags: "keep"
             }),
             {
                 headers: {
@@ -37,7 +35,7 @@ module.exports = {
         );
 
         const translated = response.data.translations[0].text
-            .replace(/SKIP(\d+)SKIP/g, (_, i) => skipped[parseInt(i)]);
+            .replace(/<keep>(.*?)<\/keep>/g, '$1');
 
         const webhooks = await interaction.channel.fetchWebhooks();
         let webhook = webhooks.find(wh => wh.owner?.id === client.user.id);
@@ -47,7 +45,7 @@ module.exports = {
         }
 
         await webhook.send({
-            content: translated,
+            content: `${translated}\n-# ${text}`,
             username: interaction.member.displayName,
             avatarURL: interaction.user.displayAvatarURL()
         });
