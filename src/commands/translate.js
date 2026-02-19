@@ -9,10 +9,17 @@ module.exports = {
             description: "The English text to translate",
             type: 3, // STRING
             required: true
+        },
+        {
+            name: "reply_to",
+            description: "Paste the message link you're replying to",
+            type: 3, // STRING
+            required: false
         }
     ],
     run: async (client, interaction) => {
         const text = interaction.options.getString("text");
+        const replyTo = interaction.options.getString("reply_to");
 
         await interaction.deferReply({ ephemeral: true });
 
@@ -46,10 +53,13 @@ module.exports = {
             webhook = await interaction.channel.createWebhook({ name: "Translate" });
         }
 
+        const messageId = replyTo ? replyTo.split("/").pop() : null;
+
         await webhook.send({
             content: `${translated}\n-# ${text.replace(/\[([^\]]*)\]/g, '$1')}`,
             username: interaction.member.displayName,
-            avatarURL: interaction.user.displayAvatarURL()
+            avatarURL: interaction.user.displayAvatarURL(),
+            ...(messageId && { reply: { messageReference: messageId } })
         });
 
         await interaction.deleteReply();
