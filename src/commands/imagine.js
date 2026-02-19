@@ -16,7 +16,7 @@ module.exports = {
 
         await interaction.deferReply();
 
-        const imageUrl = `https://image.pollinations.ai/prompt/${encodeURIComponent(prompt)}?nologo=true`;
+        const imageUrl = `https://image.pollinations.ai/prompt/${encodeURIComponent(prompt)}?nologo=true&token=${process.env.POLLINATIONS_KEY}`;
 
         const imageResponse = await axios.get(imageUrl, { responseType: "arraybuffer" });
         const buffer = Buffer.from(imageResponse.data);
