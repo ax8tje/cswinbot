@@ -23,8 +23,9 @@ module.exports = {
 
         await interaction.deferReply();
 
+        const model = reference ? "kontext" : "flux";
         const refParam = reference ? `&image=${encodeURIComponent(reference.url)}` : "";
-        const imageUrl = `https://gen.pollinations.ai/image/${encodeURIComponent(prompt)}?model=flux&key=${process.env.POLLINATIONS_KEY}${refParam}`;
+        const imageUrl = `https://gen.pollinations.ai/image/${encodeURIComponent(prompt)}?model=${model}&key=${process.env.POLLINATIONS_KEY}${refParam}`;
 
         const imageResponse = await axios.get(imageUrl, { responseType: "arraybuffer" });
         const buffer = Buffer.from(imageResponse.data);
