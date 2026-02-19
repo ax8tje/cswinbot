@@ -4,10 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="15c31df6-014f-411b-9c34-a2d8894675c2" name="Changes" comment="Merge remote-tracking branch 'origin/main'">
-      <change beforePath="$PROJECT_DIR$/src/commands/backshot.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/commands/backshot.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/commands/kiss.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/commands/kiss.js" afterDir="false" />
-    </list>
+    <list default="true" id="15c31df6-014f-411b-9c34-a2d8894675c2" name="Changes" comment="Merge remote-tracking branch 'origin/main'" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -99,7 +96,7 @@
       <workItem from="1765377055947" duration="1107000" />
       <workItem from="1766191246784" duration="199000" />
       <workItem from="1771507522552" duration="2730000" />
-      <workItem from="1771511727656" duration="8140000" />
+      <workItem from="1771511727656" duration="8456000" />
     </task>
     <task id="LOCAL-00001" summary="translator">
       <option name="closed" value="true" />
@@ -285,7 +282,15 @@
       <option name="project" value="LOCAL" />
       <updated>1771519612104</updated>
     </task>
-    <option name="localTasksCounter" value="24" />
+    <task id="LOCAL-00024" summary="Merge remote-tracking branch 'origin/main'">
+      <option name="closed" value="true" />
+      <created>1771519982485</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1771519982485</updated>
+    </task>
+    <option name="localTasksCounter" value="25" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

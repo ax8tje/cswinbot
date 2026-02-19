@@ -23,8 +23,9 @@ module.exports = {
             "https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExdHZ5NXRoYWhmang3bXpzNXhvMzZteGxjdGN4MzJiaHg5bmtzbjFkOCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/IsIyvk7zftw4H2C1Kz/giphy.gif",
             "https://i.redd.it/qmsk5v38jvtf1.gif",
             "https://i.redd.it/rn2a2bpo7pye1.gif",
-            "https://media1.tenor.com/m/WjTqxzRwYNwAAAAd/gojo-satoru.gif",
-            "https://media1.tenor.com/m/EEWfrljBQr0AAAAd/spongebob-backshots.gif",
+            "https://c.tenor.com/WjTqxzRwYNwAAAAC/tenor.gif",
+            "https://c.tenor.com/fKjkjlsK9SAAAAAd/tenor.gif",
+            "https://c.tenor.com/txwpxHQAqz4AAAAd/tenor.gif",
             "https://i.makeagif.com/media/9-27-2024/VMGrRN.gif"
         ];
         const gifUrl = gifs[Math.floor(Math.random() * gifs.length)];
