@@ -47,7 +47,7 @@ module.exports = {
         }
 
         await webhook.send({
-            content: `${translated}\n-# ${text}`,
+            content: `${translated}\n-# ${text.replace(/\[([^\]]*)\]/g, '$1')}`,
             username: interaction.member.displayName,
             avatarURL: interaction.user.displayAvatarURL()
         });
