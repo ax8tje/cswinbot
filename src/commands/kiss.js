@@ -44,6 +44,8 @@ module.exports = {
 
         await interaction.reply({ embeds: [embed], components: [row] });
 
+        const replied = new Set();
+
         const collector = interaction.channel.createMessageComponentCollector({
             filter: i => i.customId === "kiss_accept" || i.customId === "kiss_reject",
             time: 30000
@@ -51,6 +53,8 @@ module.exports = {
 
         collector.on("collect", async i => {
             if (i.user.id !== target.id) {
+                if (replied.has(i.user.id)) return await i.deferUpdate();
+                replied.add(i.user.id);
                 if (i.customId === "kiss_accept") {
                     await i.reply({ content: "u wish 💀", ephemeral: true });
                 } else {
