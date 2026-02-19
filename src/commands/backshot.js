@@ -1,4 +1,3 @@
-const axios = require('axios');
 const { ActionRowBuilder, ButtonBuilder, ButtonStyle, EmbedBuilder } = require('discord.js');
 
 module.exports = {
@@ -20,12 +19,15 @@ module.exports = {
             return interaction.reply({ content: "You can't backshot yourself...", ephemeral: true });
         }
 
-        const gifRes = await axios.get("https://api.giphy.com/v1/gifs/search", {
-            params: { api_key: process.env.GIPHY_KEY, q: "backshot", limit: 50, rating: "r" }
-        });
-        const results = gifRes.data.data;
-        const gif = results[Math.floor(Math.random() * results.length)];
-        const gifUrl = gif.images.original.url;
+        const gifs = [
+            "https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExdHZ5NXRoYWhmang3bXpzNXhvMzZteGxjdGN4MzJiaHg5bmtzbjFkOCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/IsIyvk7zftw4H2C1Kz/giphy.gif",
+            "https://i.redd.it/qmsk5v38jvtf1.gif",
+            "https://i.redd.it/rn2a2bpo7pye1.gif",
+            "https://media1.tenor.com/m/WjTqxzRwYNwAAAAd/gojo-satoru.gif",
+            "https://media1.tenor.com/m/EEWfrljBQr0AAAAd/spongebob-backshots.gif",
+            "https://i.makeagif.com/media/9-27-2024/VMGrRN.gif"
+        ];
+        const gifUrl = gifs[Math.floor(Math.random() * gifs.length)];
 
         const sender = interaction.member.displayName;
         const receiver = targetMember?.displayName ?? target.username;
