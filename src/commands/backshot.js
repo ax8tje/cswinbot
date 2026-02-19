@@ -51,12 +51,22 @@ module.exports = {
         await interaction.reply({ embeds: [embed], components: [row] });
 
         const collector = interaction.channel.createMessageComponentCollector({
-            filter: i => i.user.id === target.id && (i.customId === "backshot_accept" || i.customId === "backshot_reject"),
-            time: 30000,
-            max: 1
+            filter: i => i.customId === "backshot_accept" || i.customId === "backshot_reject",
+            time: 30000
         });
 
         collector.on("collect", async i => {
+            if (i.user.id !== target.id) {
+                if (i.customId === "backshot_accept") {
+                    await i.reply({ content: "u wish 💀", ephemeral: true });
+                } else {
+                    await i.reply({ content: "this ain't about you bro 💀", ephemeral: true });
+                }
+                return;
+            }
+
+            collector.stop("responded");
+
             if (i.customId === "backshot_accept") {
                 const acceptEmbed = new EmbedBuilder()
                     .setColor(0xff4500)
