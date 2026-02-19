@@ -16,9 +16,12 @@ module.exports = {
 
         await interaction.deferReply();
 
-        const imageUrl = `https://image.pollinations.ai/prompt/${encodeURIComponent(prompt)}?nologo=true&token=${process.env.POLLINATIONS_KEY}`;
+        const imageUrl = `https://gen.pollinations.ai/image/${encodeURIComponent(prompt)}`;
 
-        const imageResponse = await axios.get(imageUrl, { responseType: "arraybuffer" });
+        const imageResponse = await axios.get(imageUrl, {
+            responseType: "arraybuffer",
+            headers: { Authorization: `Bearer ${process.env.POLLINATIONS_KEY}` }
+        });
         const buffer = Buffer.from(imageResponse.data);
 
         await interaction.editReply({
