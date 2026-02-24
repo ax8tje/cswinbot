@@ -33,20 +33,22 @@ async function checkInactiveMembers() {
             const robloxData = await getPlayerInfo(player.robloxId);
             checkedCount++;
 
-            // If player has no clanId (not in a clan), mark for removal
-            if (!robloxData || !robloxData.clanId) {
-                console.log(`[InactiveCron] Player ${player.robloxId} (Discord: ${discordId}) is not in a clan - removing`);
+            // Remove if not in any clan, or if they switched to a different clan
+            const liveClanId = robloxData?.clanId?.toString();
+            const storedClanId = player.clanId?.toString();
+            if (!robloxData || !liveClanId || liveClanId !== storedClanId) {
+                console.log(`[InactiveCron] Player ${player.robloxId} (Discord: ${discordId}) left or switched clan (stored: ${storedClanId}, live: ${liveClanId ?? 'none'}) - removing`);
                 playersToRemove.push(discordId);
             }
 
-            // Rate limiting: 100ms delay between API calls
-            await sleep(100);
+            // Rate limiting: 2s delay between API calls
+            await sleep(2000);
         } catch (err) {
             console.error(`[InactiveCron] Error checking ${discordId}:`, err.message);
         }
     }
 
-    // Remove all players that are not in a clan
+    // Remove all players that left or switched clans
     for (const discordId of playersToRemove) {
         delete data.players[discordId];
         removedCount++;
@@ -59,8 +61,8 @@ async function checkInactiveMembers() {
     console.log(`[InactiveCron] Check complete: ${checkedCount} checked, ${removedCount} removed at ${new Date().toLocaleString()}`);
 }
 
-// Run every 10 minutes
-cron.schedule('*/10 * * * *', async () => {
+// Run every hour
+cron.schedule('0 * * * *', async () => {
     try {
         await checkInactiveMembers();
     } catch (err) {
@@ -68,4 +70,4 @@ cron.schedule('*/10 * * * *', async () => {
     }
 });
 
-console.log('   - Inactive member check: Every 10 minutes');
+console.log('   - Inactive member check: Every hour');
