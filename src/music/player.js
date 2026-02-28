@@ -62,7 +62,12 @@ async function playSong(songFile) {
 
 async function playNext() {
     if (currentSong) history.push(currentSong);
-    if (queue.length === 0) queue = loadSongs(); // reshuffle when exhausted
+    if (queue.length === 0) {
+        queue = loadSongs();
+        if (queue.length > 1 && queue[0] === currentSong) {
+            [queue[0], queue[1]] = [queue[1], queue[0]];
+        }
+    }
     await playSong(queue.shift());
 }
 
