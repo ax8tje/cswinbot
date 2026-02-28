@@ -8,6 +8,9 @@ node_modules/
 src/data/playerData.json
 src/data/clans.json
 
+# Music
+src/songs/
+
 # Logs
 *.log
 npm-debug.log*
