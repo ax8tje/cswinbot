@@ -15,18 +15,22 @@ module.exports = (client) => {
 
     client.on("interactionCreate", async interaction => {
         if (interaction.isButton()) {
-            const allowedUsers = require('../music/allowedUsers');
+            try {
+                const allowedUsers = require('../music/allowedUsers');
 
-            if (!allowedUsers.includes(interaction.user.id)) {
-                return interaction.reply({ content: 'You cant use that dumahh😭', flags: 64 });
+                if (!allowedUsers.includes(interaction.user.id)) {
+                    return interaction.reply({ content: 'You cant use that dumahh😭', flags: 64 });
+                }
+
+                const { playNext, playPrev, togglePause } = require('../music/player');
+                await interaction.deferUpdate();
+
+                if (interaction.customId === 'music_next') await playNext();
+                else if (interaction.customId === 'music_prev') await playPrev();
+                else if (interaction.customId === 'music_pause') await togglePause();
+            } catch (err) {
+                console.error("Button interaction error:", err);
             }
-
-            const { playNext, playPrev, togglePause } = require('../music/player');
-            await interaction.deferUpdate();
-
-            if (interaction.customId === 'music_next') await playNext();
-            else if (interaction.customId === 'music_prev') await playPrev();
-            else if (interaction.customId === 'music_pause') await togglePause();
             return;
         }
 
